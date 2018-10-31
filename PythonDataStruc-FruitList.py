@@ -47,6 +47,7 @@ def addFruit(fruitParam = ""):
         again = input("Add another fruit (Y/N)? ")
         if again.casefold() != "y":
             more = False
+        newFruit = ""
 
 
 def printFruits():
