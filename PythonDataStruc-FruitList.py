@@ -18,17 +18,19 @@ def errorMsg(msg):
     print(msg)
 
 
-def addFruit():
+def addFruit(fruitParam = ""):
     # constitutes the add fruit function
 
     more = True
     global fruit
     again = "Y"
     found = False
+    newFruit = fruitParam
 
     # Ask for fruits
     while more:
-        newFruit = input("Add a new fruit: ")
+        if len(newFruit) < 1:
+            newFruit = input("Add a new fruit: ")
 
         # check if the fruit being added is already in the list
         # instead of comparing the fruit by element
@@ -69,6 +71,8 @@ def remFruit():
     global fruit
     what = input("Which fruit to remove? ")
     what = what.lower()
+
+    # check if the fruit exist
     if what in fruit:
         # asks for confirmation
 
@@ -78,6 +82,19 @@ def remFruit():
             if sure == "y":
                 position = fruit.index(what)
                 del fruit[position]
+        else:
+            errorMsg("Invalid. y or n only")
+    else:
+        # if the user tries to remove a fruit that
+        # is not on the list, it will suggest that we can add it
+        errorMsg("The fruit " + what + " does not exist in the list.")
+
+        # confirm if the user wants to add it
+        addIt = input("Would you like to add it (y/n)? ")
+        addIt = addIt.lower()
+        if addIt in "yn":
+            if addIt == "y":
+                addFruit(what)
         else:
             errorMsg("Invalid. y or n only")
 
